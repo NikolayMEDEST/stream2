@@ -27,8 +27,10 @@ public class Main {
         System.out.println("Список лиц призывного возраста");
         System.out.println(warFamilyList);
         List<Person> hightEducation = persons.stream()
-                .filter(x -> (x.getSex() == Sex.MAN && x.getAge() > 18 && x.getAge() < 60 && x.getEducation() == Education.HIGHER)
-                        ||  (x.getSex() == Sex.WOMAN && x.getAge() > 18 && x.getAge() < 65 && x.getEducation() == Education.HIGHER))
+                .filter(x -> x.getEducation() == Education.HIGHER)
+                .filter(y -> y.getAge() > 18)
+                .filter(z -> (z.getSex() == Sex.MAN && z.getAge() < 65)
+                        ||  (z.getSex() == Sex.WOMAN && z.getAge() < 60))
                 .sorted(Comparator.comparing(Person::getFamily))
                 .collect(Collectors.toList());
         System.out.println("Отсортированный по фамилиям список работоспособных с высшим образованием");
